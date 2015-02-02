@@ -15,6 +15,7 @@ namespace Library.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Books
+        [Route("Books/All")]
         public ActionResult Index()
         {
             var books = db.Books.Include(b => b.Author);
