@@ -17,9 +17,19 @@
         <dd>
             @Html.DisplayFor(model => model.AuthorName)
         </dd>
+            @foreach (var t in ViewBag.books)
+            {
+                <dt>
+                    Libros
+                </dt>
+                <dd>
+                    @t.Title
+                </dd>
+            }
 
     </dl>
-</div>
+    
+    </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AuthorID }) |
     @Html.ActionLink("Back to List", "Index")
