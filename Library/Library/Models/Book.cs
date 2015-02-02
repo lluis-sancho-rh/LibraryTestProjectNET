@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -16,7 +17,7 @@ namespace Library.Models
         public int NumPages { get; set; }
 
         public int AuthorID { get; set; }
-        public Author Author { get; set; }
+        public virtual Author Author { get; set; }
 
         public double Price { get; set; }
 
