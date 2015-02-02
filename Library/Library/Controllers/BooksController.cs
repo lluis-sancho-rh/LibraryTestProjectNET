@@ -15,10 +15,10 @@ namespace Library.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Books
-        [Route("Books/All")]
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            var books = db.Books.Include(b => b.Author);
+            return View(books.ToList());
         }
 
         // GET: Books/Details/5
@@ -39,6 +39,7 @@ namespace Library.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName");
             return View();
         }
 
@@ -47,7 +48,7 @@ namespace Library.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookID,Title,NumPages,Price")] Book book)
+        public ActionResult Create([Bind(Include = "BookID,Title,NumPages,AuthorID,Price,Content")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +57,7 @@ namespace Library.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
             return View(book);
         }
 
@@ -71,6 +73,7 @@ namespace Library.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
             return View(book);
         }
 
@@ -79,7 +82,7 @@ namespace Library.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookID,Title,NumPages,Price")] Book book)
+        public ActionResult Edit([Bind(Include = "BookID,Title,NumPages,AuthorID,Price,Content")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +90,7 @@ namespace Library.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
             return View(book);
         }
 
