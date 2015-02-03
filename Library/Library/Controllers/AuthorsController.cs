@@ -32,6 +32,7 @@ namespace Library.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.books = author.Books;
             return View(author);
         }
 
