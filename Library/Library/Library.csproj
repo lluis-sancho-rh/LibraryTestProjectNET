@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201502021235485_add_author_id_to_books.Designer.cs">
       <DependentUpon>201502021235485_add_author_id_to_books.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502031532034_author.cs" />
+    <Compile Include="Migrations\201502031532034_author.Designer.cs">
+      <DependentUpon>201502031532034_author.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
@@ -1030,7 +1034,7 @@
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
-    <Content Include="Views\Authors\Books.cshtml" />
+    <Content Include="Views\Authors\_Books.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1052,6 +1056,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502021235485_add_author_id_to_books.resx">
       <DependentUpon>201502021235485_add_author_id_to_books.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031532034_author.resx">
+      <DependentUpon>201502031532034_author.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

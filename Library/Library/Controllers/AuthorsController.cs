@@ -40,8 +40,8 @@ namespace Library.Controllers
         public ActionResult Create()
         {
             var author = new Author();
-            author.BuildBooks();
-            return View();
+            author.BuildBooks(2);
+            return View(author);
         }
 
         // POST: Authors/Create
@@ -49,7 +49,7 @@ namespace Library.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AuthorID,AuthorName")] Author author)
+        public ActionResult Create(Author author)
         {
             if (ModelState.IsValid)
             {

@@ -12,6 +12,7 @@ namespace Library.Models
 
         public int BookID { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         public int NumPages { get; set; }

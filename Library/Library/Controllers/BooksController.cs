@@ -49,7 +49,7 @@ namespace Library.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookID,Title,NumPages,AuthorID,Price,Content")] Book book)
+        public ActionResult Create([Bind(Include = "BookID,Title,NumPages,Author,Price,Content")] Book book)
         {
             if (ModelState.IsValid)
             {

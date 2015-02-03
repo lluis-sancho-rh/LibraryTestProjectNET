@@ -10,14 +10,15 @@ namespace Library.Models
     {
        public Author()
        {
-           this.Books = new HashSet<Book>();
+           this.Books = new List<Book>();
        }
 
         public int AuthorID { get; set; }
 
+        [Required]
         public string AuthorName { get; set; }
 
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual List<Book> Books { get; set; }
 
         public void BuildBooks(int count = 1)
         {

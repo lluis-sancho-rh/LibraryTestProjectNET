@@ -9,7 +9,7 @@ namespace Library.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             ContextKey = "Library.Models.ApplicationDbContext";
         }
 
