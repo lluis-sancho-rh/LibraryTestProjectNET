@@ -38,6 +38,8 @@ namespace Library.Controllers
         // GET: Authors/Create
         public ActionResult Create()
         {
+            var author = new Author();
+            author.BuildBooks();
             return View();
         }
 
