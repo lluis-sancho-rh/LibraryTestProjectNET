@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Library.Models;
+using PagedList;
 
 namespace Library.Controllers
 {
@@ -15,9 +16,38 @@ namespace Library.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Authors
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchName, int? page)
         {
-            return View(db.Authors.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "authorName_desc" : "";
+            if (searchName != null){
+                page = 1;
+            }else{
+                searchName = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchName;
+            
+            var authors = from s in db.Authors
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                authors = authors.Where(s => s.AuthorName.Contains(searchName));
+            }
+
+            switch (sortOrder)
+            {
+                case "authorName_desc":
+                    authors = authors.OrderByDescending(s => s.AuthorName);
+                    break;
+                default:
+                    authors = authors.OrderBy(s => s.AuthorName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(authors.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Authors/Details/5
@@ -40,7 +70,7 @@ namespace Library.Controllers
         public ActionResult Create()
         {
             var author = new Author();
-            author.BuildBooks(2);
+            author.BuildBooks();
             return View(author);
         }
 
