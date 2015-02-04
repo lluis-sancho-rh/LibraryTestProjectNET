@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,17 @@ namespace Library.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
-        }
+            var author = db.Authors.OrderBy(r => Guid.NewGuid()).Take(1).ToList();
+            ViewBag.author = author.First();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            var books = db.Books.OrderBy(r => Guid.NewGuid()).Take(3).ToList();
+            ViewBag.books = books;
 
             return View();
-        }
+        }        
     }
 }
